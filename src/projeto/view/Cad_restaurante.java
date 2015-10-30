@@ -48,13 +48,15 @@ public class Cad_restaurante extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         FTF_numero = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         FTF_telefone = new javax.swing.JFormattedTextField();
+        jTextField1 = new javax.swing.JTextField();
         BG_6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(690, 520));
         setMinimumSize(new java.awt.Dimension(690, 520));
-        setPreferredSize(new java.awt.Dimension(690, 520));
+        setPreferredSize(new java.awt.Dimension(690, 550));
         setResizable(false);
         setType(java.awt.Window.Type.UTILITY);
         addFocusListener(new java.awt.event.FocusAdapter() {
@@ -86,6 +88,7 @@ public class Cad_restaurante extends javax.swing.JFrame {
         getContentPane().add(LB_intro1);
         LB_intro1.setBounds(20, 10, 250, 30);
 
+        BT_proximo1.setBackground(new java.awt.Color(254, 254, 254));
         BT_proximo1.setIcon(new javax.swing.ImageIcon("/home/jorgesff/Imagens/seta-preta-a-direita_pequena.png")); // NOI18N
         BT_proximo1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,7 +96,7 @@ public class Cad_restaurante extends javax.swing.JFrame {
             }
         });
         getContentPane().add(BT_proximo1);
-        BT_proximo1.setBounds(590, 430, 40, 40);
+        BT_proximo1.setBounds(610, 450, 40, 40);
 
         LB_usuario1.setText("Usuario: ");
         getContentPane().add(LB_usuario1);
@@ -172,6 +175,10 @@ public class Cad_restaurante extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(190, 270, 70, 16);
 
+        jLabel3.setText("Cidade:");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(260, 420, 60, 16);
+
         try {
             FTF_telefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)########")));
         } catch (java.text.ParseException ex) {
@@ -179,12 +186,14 @@ public class Cad_restaurante extends javax.swing.JFrame {
         }
         getContentPane().add(FTF_telefone);
         FTF_telefone.setBounds(270, 260, 170, 28);
+        getContentPane().add(jTextField1);
+        jTextField1.setBounds(320, 410, 150, 28);
 
         BG_6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/projeto/view/Fundo.jpg"))); // NOI18N
         BG_6.setBorder(new javax.swing.border.MatteBorder(null));
         BG_6.setFocusable(false);
         getContentPane().add(BG_6);
-        BG_6.setBounds(0, 0, 690, 520);
+        BG_6.setBounds(0, 0, 690, 540);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -287,6 +296,8 @@ public class Cad_restaurante extends javax.swing.JFrame {
     private javax.swing.JTextField TF_usuario1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

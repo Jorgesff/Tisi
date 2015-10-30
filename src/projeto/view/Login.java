@@ -63,6 +63,11 @@ public class Login extends javax.swing.JFrame {
                 PF_passActionPerformed(evt);
             }
         });
+        PF_pass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                PF_passKeyPressed(evt);
+            }
+        });
         getContentPane().add(PF_pass);
         PF_pass.setBounds(160, 260, 150, 28);
 
@@ -147,6 +152,10 @@ public class Login extends javax.swing.JFrame {
         new Cadastro().setVisible(rootPaneCheckingEnabled);
         this.dispose();
     }//GEN-LAST:event_Lb_cadastraMouseClicked
+
+    private void PF_passKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PF_passKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PF_passKeyPressed
 
     /**
      * @param args the command line arguments

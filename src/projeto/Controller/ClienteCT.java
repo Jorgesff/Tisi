@@ -18,4 +18,8 @@ public class ClienteCT {
       ClienteDAOImpl cliDAO = new ClienteDAOImpl();
       return cliDAO.Search_login(user, pass);
   }
+  public boolean novo(String nome,int id_cidade, String telefone, String email, String password){
+        ClienteDAOImpl cliDAO = new ClienteDAOImpl();
+        return cliDAO.insert(nome, id_cidade, telefone, email, password);
+  }
 }

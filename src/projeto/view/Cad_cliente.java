@@ -6,7 +6,17 @@
 package projeto.view;
 
 import static java.awt.image.ImageObserver.WIDTH;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import projeto.Controller.ClienteCT;
+import projeto.Modelo.Database;
 
 /**
  *
@@ -43,6 +53,10 @@ public class Cad_cliente extends javax.swing.JFrame {
         TF_email = new javax.swing.JTextField();
         PF_senha = new javax.swing.JPasswordField();
         PF_conf_senha = new javax.swing.JPasswordField();
+        CB_cidade = new javax.swing.JComboBox();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        FT_telefone = new javax.swing.JFormattedTextField();
         BG_5 = new javax.swing.JLabel();
 
         jToolBar1.setRollover(true);
@@ -93,7 +107,7 @@ public class Cad_cliente extends javax.swing.JFrame {
 
         LB_email.setText("Email:");
         getContentPane().add(LB_email);
-        LB_email.setBounds(260, 310, 38, 20);
+        LB_email.setBounds(260, 350, 38, 20);
         getContentPane().add(TF_usuario);
         TF_usuario.setBounds(310, 140, 140, 28);
 
@@ -103,7 +117,7 @@ public class Cad_cliente extends javax.swing.JFrame {
             }
         });
         getContentPane().add(TF_nome);
-        TF_nome.setBounds(310, 260, 140, 28);
+        TF_nome.setBounds(310, 260, 160, 28);
 
         TF_email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,15 +125,42 @@ public class Cad_cliente extends javax.swing.JFrame {
             }
         });
         getContentPane().add(TF_email);
-        TF_email.setBounds(310, 300, 140, 28);
+        TF_email.setBounds(310, 340, 160, 28);
 
-        PF_senha.setText("jPasswordField1");
+        PF_senha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PF_senhaActionPerformed(evt);
+            }
+        });
         getContentPane().add(PF_senha);
-        PF_senha.setBounds(310, 180, 145, 28);
-
-        PF_conf_senha.setText("jPasswordField1");
+        PF_senha.setBounds(310, 180, 150, 28);
         getContentPane().add(PF_conf_senha);
-        PF_conf_senha.setBounds(310, 220, 145, 28);
+        PF_conf_senha.setBounds(310, 220, 150, 28);
+
+        CB_cidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Franca", "Ribeirão Preto", "São Paulo", "Belo Horizonte" }));
+        getContentPane().add(CB_cidade);
+        CB_cidade.setBounds(310, 380, 140, 28);
+
+        jLabel1.setText("Cidade");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(250, 390, 44, 16);
+
+        jLabel2.setText("Telefone:");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(240, 310, 70, 16);
+
+        try {
+            FT_telefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)########")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        FT_telefone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FT_telefoneActionPerformed(evt);
+            }
+        });
+        getContentPane().add(FT_telefone);
+        FT_telefone.setBounds(310, 300, 160, 28);
 
         BG_5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/projeto/view/Fundo.jpg"))); // NOI18N
         BG_5.setBorder(new javax.swing.border.MatteBorder(null));
@@ -144,23 +185,36 @@ public class Cad_cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_TF_emailActionPerformed
 
     private void BT_proximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BT_proximoActionPerformed
-         if(     (this.TF_email.getText().isEmpty())||
+         if(    (this.TF_email.getText().isEmpty())||
                 (this.TF_nome.getText().isEmpty())||
                 (this.TF_usuario.getText().isEmpty())||
                 (this.PF_senha.getPassword().length==0)||
-                (this.PF_conf_senha.getPassword().length==0)
+                (this.PF_conf_senha.getPassword().length==0)||
+                (this.CB_cidade.getSelectedItem()== "")
           ){
              JOptionPane.showMessageDialog(rootPane, "Preencha todos os campos", "ERRO", WIDTH);            
-            }else{
-                new Cad_conclusao().setVisible(true);
-                this.dispose();
-            }
-            
+            }else if(Arrays.equals(this.PF_senha.getPassword(), this.PF_conf_senha.getPassword())){
+                        ClienteCT cliCT = new ClienteCT();
+                        boolean i = cliCT.novo(this.TF_nome.getText(), this.CB_cidade.getSelectedIndex(), this.FT_telefone.getText(), this.TF_email.getText(), String.valueOf(this.PF_senha.getPassword()));
+                        if(i == true){
+                            new Cad_conclusao().setVisible(true);
+                            this.dispose();
+                        }
+                    }
     }//GEN-LAST:event_BT_proximoActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-       
+
+        
     }//GEN-LAST:event_formWindowOpened
+
+    private void PF_senhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PF_senhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PF_senhaActionPerformed
+
+    private void FT_telefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FT_telefoneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FT_telefoneActionPerformed
 
     /**
      * @param args the command line arguments
@@ -200,6 +254,8 @@ public class Cad_cliente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BG_5;
     private javax.swing.JButton BT_proximo;
+    private javax.swing.JComboBox CB_cidade;
+    private javax.swing.JFormattedTextField FT_telefone;
     private javax.swing.JLabel LB_conf_senha;
     private javax.swing.JLabel LB_email;
     private javax.swing.JLabel LB_intro;
@@ -211,6 +267,8 @@ public class Cad_cliente extends javax.swing.JFrame {
     private javax.swing.JTextField TF_email;
     private javax.swing.JTextField TF_nome;
     private javax.swing.JTextField TF_usuario;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
 }

@@ -12,7 +12,7 @@ import projeto.Objetos.Cliente;
  * @author jorgesff
  */
 public interface ClienteDAO {
-    public void insert(String nome,String telefone,String username,String password);
+    public boolean insert(String nome,int id_cidade,String telefone,String email,String password);
     public int Search_login(String username, String password);
     public ArrayList<Cliente> Search_intern(String username);
     public void delete(String username, String password);

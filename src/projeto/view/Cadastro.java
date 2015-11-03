@@ -93,10 +93,10 @@ public class Cadastro extends javax.swing.JFrame {
                 if(this.jRadioButton1.isSelected()){
                     new Cad_cliente().setVisible(true);
                     this.dispose();
-                }else{
+                }else if(this.jRadioButton2.isSelected()){
                     new Cad_restaurante().setVisible(true);
                     this.dispose();
-                }
+                      }
             
     }//GEN-LAST:event_jButton1ActionPerformed
 

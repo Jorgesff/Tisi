@@ -22,4 +22,8 @@ public class ClienteCT {
         ClienteDAOImpl cliDAO = new ClienteDAOImpl();
         return cliDAO.insert(nome, id_cidade, telefone, email, password);
   }
+  public boolean has_user(String email){
+      ClienteDAOImpl cliDAO = new ClienteDAOImpl();
+      return cliDAO.has_user(email);
+  }
 }

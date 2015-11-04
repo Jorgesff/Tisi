@@ -35,6 +35,7 @@ public class ClienteDAOImpl implements ClienteDAO {
             stat.setString(4, email);
             stat.setString(5, password);
             stat.execute();
+            conn.close();
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
@@ -56,6 +57,7 @@ public class ClienteDAOImpl implements ClienteDAO {
                 stat.setString(1, username);
                 stat.setString(2, password);
                 ResultSet result = stat.executeQuery();
+                conn.close();
                  Logger.getLogger(ClienteDAOImpl.class.getName()).log(Level.INFO, "QUERY EXECUTADA");
                // System.out.println(result.getArray("username"));
                 while(result.next()){
@@ -87,6 +89,40 @@ public class ClienteDAOImpl implements ClienteDAO {
     @Override
     public void delete(String username, String password) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean has_user(String email) {
+        try {
+                ArrayList<Cliente> existente = new ArrayList();
+                conn = Database.Conect();
+                Logger.getLogger(ClienteDAOImpl.class.getName()).log(Level.INFO, "CONECTADO AO BANCO");
+                String query = "select email from cad_clientes where email = ?;";
+                
+                stat = conn.prepareStatement(query);
+                stat.setString(1, email);
+                ResultSet result = stat.executeQuery();
+                conn.close();
+                 Logger.getLogger(ClienteDAOImpl.class.getName()).log(Level.INFO, "QUERY EXECUTADA");
+               // System.out.println(result.getArray("username"));
+                while(result.next()){
+                    Cliente x = new Cliente();
+                    x.setUsername(result.getString("email"));
+                    existente.add(x);
+                     Logger.getLogger(ClienteDAOImpl.class.getName()).log(Level.INFO, "Usuario encontrado");
+                }
+                
+                if(existente.isEmpty())
+                    return false;
+                else 
+                    return true;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            
+            return false;
+        }
+        
     }
     
 }

@@ -16,4 +16,5 @@ public interface ClienteDAO {
     public int Search_login(String username, String password);
     public ArrayList<Cliente> Search_intern(String username);
     public void delete(String username, String password);
+    public boolean has_user(String email);
 }

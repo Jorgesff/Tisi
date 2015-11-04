@@ -185,6 +185,8 @@ public class Cad_cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_TF_emailActionPerformed
 
     private void BT_proximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BT_proximoActionPerformed
+        ClienteCT cliCT = new ClienteCT();
+                         
          if(    (this.TF_email.getText().isEmpty())||
                 (this.TF_nome.getText().isEmpty())||
                 (this.TF_usuario.getText().isEmpty())||
@@ -193,14 +195,16 @@ public class Cad_cliente extends javax.swing.JFrame {
                 (this.CB_cidade.getSelectedItem()== "")
           ){
              JOptionPane.showMessageDialog(rootPane, "Preencha todos os campos", "ERRO", WIDTH);            
-            }else if(Arrays.equals(this.PF_senha.getPassword(), this.PF_conf_senha.getPassword())){
-                        ClienteCT cliCT = new ClienteCT();
-                        boolean i = cliCT.novo(this.TF_nome.getText(), this.CB_cidade.getSelectedIndex(), this.FT_telefone.getText(), this.TF_email.getText(), String.valueOf(this.PF_senha.getPassword()));
-                        if(i == true){
-                            new Cad_conclusao().setVisible(true);
-                            this.dispose();
+            }else if(cliCT.has_user(this.TF_email.getText()) == false)   
+                        if(Arrays.equals(this.PF_senha.getPassword(), this.PF_conf_senha.getPassword())){
+                            boolean i = cliCT.novo(this.TF_nome.getText(), this.CB_cidade.getSelectedIndex(), this.FT_telefone.getText(), this.TF_email.getText(), String.valueOf(this.PF_senha.getPassword()));
+                            if(i == true){
+                                new Cad_conclusao().setVisible(true);
+                                this.dispose();
+                            }
                         }
-                    }
+                    else
+                           JOptionPane.showMessageDialog(rootPane, "Usuario ja existente", "ERRO", WIDTH);  
     }//GEN-LAST:event_BT_proximoActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

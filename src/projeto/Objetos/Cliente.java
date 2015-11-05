@@ -10,7 +10,16 @@ package projeto.Objetos;
  * @author jorgesff
  */
 public class Cliente {
-    private String nome, telefone, username, password;
+    private String nome, telefone, email, password;
+    private int cidade;
+
+    public int getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(int cidade) {
+        this.cidade = cidade;
+    }
 
     public String getNome() {
         return nome;
@@ -28,12 +37,12 @@ public class Cliente {
         this.telefone = telefone;
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String username) {
+        this.email = username;
     }
 
     public String getPassword() {

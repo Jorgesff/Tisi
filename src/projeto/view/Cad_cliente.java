@@ -6,17 +6,9 @@
 package projeto.view;
 
 import static java.awt.image.ImageObserver.WIDTH;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import projeto.Controller.ClienteCT;
-import projeto.Modelo.Database;
 
 /**
  *
@@ -186,30 +178,33 @@ public class Cad_cliente extends javax.swing.JFrame {
 
     private void BT_proximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BT_proximoActionPerformed
         ClienteCT cliCT = new ClienteCT();
-                         
-         if(    (this.TF_email.getText().isEmpty())||
-                (this.TF_nome.getText().isEmpty())||
-                (this.TF_usuario.getText().isEmpty())||
-                (this.PF_senha.getPassword().length==0)||
-                (this.PF_conf_senha.getPassword().length==0)||
-                (this.CB_cidade.getSelectedItem()== "")
-          ){
-             JOptionPane.showMessageDialog(rootPane, "Preencha todos os campos", "ERRO", WIDTH);            
-            }else if(cliCT.has_user(this.TF_email.getText()) == false)   
-                        if(Arrays.equals(this.PF_senha.getPassword(), this.PF_conf_senha.getPassword())){
-                            boolean i = cliCT.novo(this.TF_nome.getText(), this.CB_cidade.getSelectedIndex(), this.FT_telefone.getText(), this.TF_email.getText(), String.valueOf(this.PF_senha.getPassword()));
-                            if(i == true){
-                                new Cad_conclusao().setVisible(true);
-                                this.dispose();
-                            }
-                        }
-                    else
-                           JOptionPane.showMessageDialog(rootPane, "Usuario ja existente", "ERRO", WIDTH);  
+
+        if ((this.TF_email.getText().isEmpty())
+                || (this.TF_nome.getText().isEmpty())
+                || (this.TF_usuario.getText().isEmpty())
+                || (this.PF_senha.getPassword().length == 0)
+                || (this.PF_conf_senha.getPassword().length == 0)
+                || (this.CB_cidade.getSelectedItem() == "")) {
+            JOptionPane.showMessageDialog(rootPane, "Preencha todos os campos", "ERRO", WIDTH);
+        } else if (cliCT.has_user(this.TF_email.getText()) == false) {
+                if (Arrays.equals(this.PF_senha.getPassword(), this.PF_conf_senha.getPassword())) {
+                    boolean i = cliCT.novo(this.TF_nome.getText(),
+                        this.CB_cidade.getSelectedIndex()+1,
+                        this.FT_telefone.getText(),
+                        this.TF_email.getText(),
+                        String.valueOf(this.PF_senha.getPassword()));
+                    if (i == true) {
+                        new Cad_conclusao().setVisible(true);
+                        this.dispose();
+                    }
+                }
+            }else
+            JOptionPane.showMessageDialog(rootPane, "Usuario ja existente", "ERRO", WIDTH);
     }//GEN-LAST:event_BT_proximoActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
 
-        
+
     }//GEN-LAST:event_formWindowOpened
 
     private void PF_senhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PF_senhaActionPerformed

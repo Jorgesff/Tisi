@@ -10,61 +10,78 @@ package projeto.Objetos;
  * @author jorgesff
  */
 public class Restaurante {
-   static private String nome, usuario, email,local,endereco,numero,telefone;
+   private String nome, usuario, email,local,endereco,telefone, password ;
 
-    public static String getTelefone() {
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+   private int lotacao,numero;
+
+    public int getLotacao() {
+        return lotacao;
+    }
+
+    public  void setLotacao(int lotacao) {
+        this.lotacao = lotacao;
+    }
+
+    public  String getTelefone() {
         return telefone;
     }
 
-    public static void setTelefone(String telefone) {
-        Restaurante.telefone = telefone;
+    public  void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 
-    public static String getNome() {
+    public  String getNome() {
         return nome;
     }
 
-    public static void setNome(String nome) {
-        Restaurante.nome = nome;
+    public  void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public static String getUsuario() {
+    public  String getUsuario() {
         return usuario;
     }
 
-    public static void setUsuario(String usuario) {
-        Restaurante.usuario = usuario;
+    public  void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
-    public static String getEmail() {
+    public  String getEmail() {
         return email;
     }
 
-    public static void setEmail(String email) {
-        Restaurante.email = email;
+    public  void setEmail(String email) {
+        this.email = email;
     }
 
-    public static String getLocal() {
+    public  String getLocal() {
         return local;
     }
 
-    public static void setLocal(String local) {
-        Restaurante.local = local;
+    public  void setLocal(String local) {
+        this.local = local;
     }
 
-    public static String getEndereco() {
+    public  String getEndereco() {
         return endereco;
     }
 
-    public static void setEndereco(String endereco) {
-        Restaurante.endereco = endereco;
+    public  void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
 
-    public static String getNumero() {
+    public  int getNumero() {
         return numero;
     }
 
-    public static void setNumero(String numero) {
-        Restaurante.numero = numero;
+    public  void setNumero(int numero) {
+        this.numero = numero;
     }
 }

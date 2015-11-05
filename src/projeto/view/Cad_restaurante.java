@@ -5,7 +5,10 @@
  */
 package projeto.view;
 
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader;
+import java.util.Arrays;
 import javax.swing.JOptionPane;
+import projeto.Controller.RestauranteCT;
 
 /**
  *
@@ -36,8 +39,8 @@ public class Cad_restaurante extends javax.swing.JFrame {
         LB_conf_senha1 = new javax.swing.JLabel();
         LB_nome1 = new javax.swing.JLabel();
         LB_email1 = new javax.swing.JLabel();
-        TF_usuario1 = new javax.swing.JTextField();
-        TF_nome1 = new javax.swing.JTextField();
+        TF_fantasia = new javax.swing.JTextField();
+        TF_razao = new javax.swing.JTextField();
         TF_email1 = new javax.swing.JTextField();
         PF_senha1 = new javax.swing.JPasswordField();
         PF_conf_senha1 = new javax.swing.JPasswordField();
@@ -50,15 +53,15 @@ public class Cad_restaurante extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         FTF_telefone = new javax.swing.JFormattedTextField();
-        jTextField1 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        CB_cidade = new javax.swing.JComboBox();
+        TF_lotacao = new javax.swing.JTextField();
         BG_6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(690, 520));
         setMinimumSize(new java.awt.Dimension(690, 520));
-        setPreferredSize(new java.awt.Dimension(690, 550));
+        setPreferredSize(new java.awt.Dimension(690, 570));
         setResizable(false);
         setType(java.awt.Window.Type.UTILITY);
         addFocusListener(new java.awt.event.FocusAdapter() {
@@ -98,7 +101,7 @@ public class Cad_restaurante extends javax.swing.JFrame {
             }
         });
         getContentPane().add(BT_proximo1);
-        BT_proximo1.setBounds(620, 520, 40, 40);
+        BT_proximo1.setBounds(620, 490, 40, 40);
 
         LB_usuario1.setText("Nome fantasia");
         getContentPane().add(LB_usuario1);
@@ -119,16 +122,22 @@ public class Cad_restaurante extends javax.swing.JFrame {
         LB_email1.setText("Email:");
         getContentPane().add(LB_email1);
         LB_email1.setBounds(200, 220, 38, 20);
-        getContentPane().add(TF_usuario1);
-        TF_usuario1.setBounds(270, 50, 140, 28);
 
-        TF_nome1.addActionListener(new java.awt.event.ActionListener() {
+        TF_fantasia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TF_nome1ActionPerformed(evt);
+                TF_fantasiaActionPerformed(evt);
             }
         });
-        getContentPane().add(TF_nome1);
-        TF_nome1.setBounds(270, 170, 140, 28);
+        getContentPane().add(TF_fantasia);
+        TF_fantasia.setBounds(270, 50, 140, 28);
+
+        TF_razao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TF_razaoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(TF_razao);
+        TF_razao.setBounds(270, 170, 140, 28);
 
         TF_email1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -168,7 +177,7 @@ public class Cad_restaurante extends javax.swing.JFrame {
         jLabel2.setBounds(110, 420, 30, 16);
 
         try {
-            FTF_numero.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####")));
+            FTF_numero.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -190,33 +199,29 @@ public class Cad_restaurante extends javax.swing.JFrame {
         }
         getContentPane().add(FTF_telefone);
         FTF_telefone.setBounds(270, 260, 170, 28);
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(320, 410, 150, 28);
 
         jLabel5.setText("Lotação maxima: ");
         getContentPane().add(jLabel5);
         jLabel5.setBounds(100, 480, 130, 16);
 
-        try {
-            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        getContentPane().add(jFormattedTextField1);
-        jFormattedTextField1.setBounds(220, 470, 90, 28);
+        CB_cidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Franca", "Ribeirão Preto", "São Paulo", "Belo Horizonte" }));
+        getContentPane().add(CB_cidade);
+        CB_cidade.setBounds(320, 410, 150, 28);
+        getContentPane().add(TF_lotacao);
+        TF_lotacao.setBounds(220, 470, 130, 28);
 
         BG_6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/projeto/view/Fundo.jpg"))); // NOI18N
         BG_6.setBorder(new javax.swing.border.MatteBorder(null));
         BG_6.setFocusable(false);
         getContentPane().add(BG_6);
-        BG_6.setBounds(10, 0, 690, 580);
+        BG_6.setBounds(0, 0, 690, 600);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void TF_nome1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TF_nome1ActionPerformed
+    private void TF_razaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TF_razaoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TF_nome1ActionPerformed
+    }//GEN-LAST:event_TF_razaoActionPerformed
 
     private void TF_email1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TF_email1ActionPerformed
         // TODO add your handling code here:
@@ -227,10 +232,11 @@ public class Cad_restaurante extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void BT_proximo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BT_proximo1ActionPerformed
+            RestauranteCT resCT = new RestauranteCT();
         if(     (this.TF_email1.getText().isEmpty())|| 
                 (this.TF_endereco.getText().isEmpty())||
-                (this.TF_nome1.getText().isEmpty())||
-                (this.TF_usuario1.getText().isEmpty())||
+                (this.TF_razao.getText().isEmpty())||
+                (this.TF_fantasia.getText().isEmpty())||
                 (this.PF_senha1.getPassword().length==0)||
                 (this.PF_conf_senha1.getPassword().length==0)||
                 (this.CB_local.getSelectedItem()=="")||
@@ -239,9 +245,25 @@ public class Cad_restaurante extends javax.swing.JFrame {
           ){
             JOptionPane.showMessageDialog(rootPane, "Preencha todos os campos", "ERRO", WIDTH);
         } else {
-            
-            new Cad_conclusao().setVisible(true);
-            this.dispose();
+            if(Arrays.equals(this.PF_senha1.getPassword(), this.PF_conf_senha1.getPassword()))
+                if(!resCT.has_user(this.TF_email1.getText())){
+                    if(resCT.novo(this.TF_fantasia.getText(),
+                                            String.valueOf(this.PF_senha1.getPassword()),
+                                            this.TF_razao.getText(),
+                                            this.TF_email1.getText(), 
+                                            this.FTF_telefone.getText(), 
+                                            (String) this.CB_local.getSelectedItem(),
+                                            this.TF_endereco.getText(),
+                                            this.FTF_numero.getText(),
+                                            this.CB_cidade.getSelectedIndex(),
+                                            this.TF_lotacao.getText()))
+                    {
+                        new Cad_conclusao().setVisible(true);
+                        this.dispose();
+                    }
+                }else
+                      JOptionPane.showMessageDialog(rootPane, "Usuario ja existente", "ERRO", WIDTH);
+                    
         }
     }//GEN-LAST:event_BT_proximo1ActionPerformed
 
@@ -260,6 +282,10 @@ public class Cad_restaurante extends javax.swing.JFrame {
     private void PF_conf_senha1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PF_conf_senha1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_PF_conf_senha1ActionPerformed
+
+    private void TF_fantasiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TF_fantasiaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TF_fantasiaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -299,6 +325,7 @@ public class Cad_restaurante extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BG_6;
     private javax.swing.JButton BT_proximo1;
+    private javax.swing.JComboBox CB_cidade;
     private javax.swing.JComboBox CB_local;
     private javax.swing.JFormattedTextField FTF_numero;
     private javax.swing.JFormattedTextField FTF_telefone;
@@ -313,14 +340,13 @@ public class Cad_restaurante extends javax.swing.JFrame {
     private javax.swing.JPasswordField PF_senha1;
     private javax.swing.JTextField TF_email1;
     private javax.swing.JTextField TF_endereco;
-    private javax.swing.JTextField TF_nome1;
-    private javax.swing.JTextField TF_usuario1;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
+    private javax.swing.JTextField TF_fantasia;
+    private javax.swing.JTextField TF_lotacao;
+    private javax.swing.JTextField TF_razao;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

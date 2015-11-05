@@ -14,9 +14,9 @@ import projeto.Objetos.Cliente;
  */
 public class ClienteCT {
    
-  public int Auth(String user, String pass){
+  public boolean Auth(String user, String pass){
       ClienteDAOImpl cliDAO = new ClienteDAOImpl();
-      return cliDAO.Search_login(user, pass);
+      return cliDAO.auth_cliente(user, pass);
   }
   public boolean novo(String nome,int id_cidade, String telefone, String email, String password){
         ClienteDAOImpl cliDAO = new ClienteDAOImpl();

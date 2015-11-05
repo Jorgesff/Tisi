@@ -46,7 +46,7 @@ public class ClienteDAOImpl implements ClienteDAO {
 
  
     @Override
-    public int Search_login(String username, String password) {
+    public boolean auth_cliente(String username, String password) {
         ArrayList<Cliente> autorizado = new ArrayList();
         try {
                 conn = Database.Conect();
@@ -62,22 +62,22 @@ public class ClienteDAOImpl implements ClienteDAO {
                // System.out.println(result.getArray("username"));
                 while(result.next()){
                     Cliente x = new Cliente();
-                    x.setUsername(result.getString("email"));
+                    x.setEmail(result.getString("email"));
                     x.setPassword(result.getString("senha"));
                     autorizado.add(x);
                      Logger.getLogger(ClienteDAOImpl.class.getName()).log(Level.INFO, "Usuario encontrado");
                 }
                 
                 if(autorizado.isEmpty())
-                    return 0;
+                    return true;
                 else 
-                    return 1;
+                    return false;
         } catch (SQLException ex) {
             
             Logger.getLogger(ClienteDAOImpl.class.getName()).log(Level.SEVERE, "não autorizou", ex);
-            
+            return false;
         }
-                return 0;
+                
     }
 
     @Override
@@ -107,7 +107,7 @@ public class ClienteDAOImpl implements ClienteDAO {
                // System.out.println(result.getArray("username"));
                 while(result.next()){
                     Cliente x = new Cliente();
-                    x.setUsername(result.getString("email"));
+                    x.setEmail(result.getString("email"));
                     existente.add(x);
                      Logger.getLogger(ClienteDAOImpl.class.getName()).log(Level.INFO, "Usuario encontrado");
                 }

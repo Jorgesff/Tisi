@@ -13,10 +13,11 @@ import projeto.Objetos.Restaurante;
  * @author jorgesff
  */
 public interface RestauranteDAO {
-    public boolean insert(String nome_fant, String senha, String razao_social, String email, String telefone,String local, String local_nome,String numero, int cidade,int lotacao);
-     public int select_nome(String nome);
-     public int select_cidade(String cidade);
-     public int delete(String nome);
-     public ArrayList<Restaurante> select_cozinha(String nacionalidade);
-     public boolean has_user(String email);
+    public boolean auth_res(String email, String password); 
+    public boolean insert(String nome_fant, String senha, String razao_social, String email, String telefone,String local, String local_nome,String numero, int cidade,String lotacao);
+    public int select_nome(String nome);
+    public int select_cidade(String cidade);
+    public int delete(String nome);
+    public ArrayList<Restaurante> select_cozinha(String nacionalidade);
+    public boolean has_user(String email);
 }  

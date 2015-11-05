@@ -8,6 +8,7 @@ package projeto.view;
 import java.awt.Color;
 import java.util.Arrays;
 import projeto.Controller.ClienteCT;
+import projeto.Controller.RestauranteCT;
 
 /**
  *
@@ -127,7 +128,8 @@ public class Login extends javax.swing.JFrame {
         user = TF_user.getText();
         password = String.valueOf(PF_pass.getPassword());
         ClienteCT cliCT = new ClienteCT();
-        if(cliCT.Auth(user, password)== 1){
+        RestauranteCT resCT = new RestauranteCT();
+        if(cliCT.Auth(user, password)== true || resCT.auth_restaurante(user, password)== true){
             new Home().setVisible(true);
             this.dispose();
         }else

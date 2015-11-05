@@ -24,9 +24,9 @@ public class ClienteDAOImpl implements ClienteDAO {
     @Override
     public boolean insert(String nome,int id_cidade, String telefone, String email, String password) {
         try {
-            conn = Database.Conect();
-            Logger.getLogger(ClienteDAOImpl.class.getName()).log(Level.INFO, "CONECTADO AO BANCO");
-            String query = "insert into cad_clientes(nome,id_cidade,telefone,email,senha,tipo_usuario) values"
+            conn = Database.Conect(); // connexão com o banco
+            Logger.getLogger(ClienteDAOImpl.class.getName()).log(Level.INFO, "CONECTADO AO BANCO DE DADOS - ClienteDAOImpl");
+            String query = "insert into cad_clientes(nome,id_cidade,telefone,email,senha,tipo_usuario) values" // query de inserção
                     + " (?,?,?,?,?,'c')";
             stat =conn.prepareStatement(query);
             stat.setString(1, nome);
@@ -34,8 +34,9 @@ public class ClienteDAOImpl implements ClienteDAO {
             stat.setString(3, telefone);
             stat.setString(4, email);
             stat.setString(5, password);
-            stat.execute();
-            conn.close();
+            stat.execute();             // execução da query
+            conn.close();               //Fecha conexão com o BD
+            Logger.getLogger(ClienteDAOImpl.class.getName()).log(Level.INFO, "DESCONECTADO DO BANCO DE DADOS - ClienteDAOImpl");
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
@@ -49,16 +50,16 @@ public class ClienteDAOImpl implements ClienteDAO {
     public boolean auth_cliente(String username, String password) {
         ArrayList<Cliente> autorizado = new ArrayList();
         try {
-                conn = Database.Conect();
-                Logger.getLogger(ClienteDAOImpl.class.getName()).log(Level.INFO, "CONECTADO AO BANCO");
-                String query = "select email, senha from cad_clientes where email = ? and senha = ?;";
+                conn = Database.Conect();                                                               //Conexão com o BD
+                Logger.getLogger(ClienteDAOImpl.class.getName()).log(Level.INFO, "CONECTADO AO BANCO DE DADOS - ClienteDAOImpl");
+                String query = "select email, senha from cad_clientes where email = ? and senha = ?;"; //query de autenticação
                 
                 stat = conn.prepareStatement(query);
                 stat.setString(1, username);
                 stat.setString(2, password);
-                ResultSet result = stat.executeQuery();
-                conn.close();
-                 Logger.getLogger(ClienteDAOImpl.class.getName()).log(Level.INFO, "QUERY EXECUTADA");
+                ResultSet result = stat.executeQuery();             // execução da query
+                conn.close();                                       //encerra conexão com o BD
+                 Logger.getLogger(ClienteDAOImpl.class.getName()).log(Level.INFO, "DESCONECTADO DO BANCO DE DADOS - ClienteDAOImpl");
                // System.out.println(result.getArray("username"));
                 while(result.next()){
                     Cliente x = new Cliente();
@@ -68,10 +69,10 @@ public class ClienteDAOImpl implements ClienteDAO {
                      Logger.getLogger(ClienteDAOImpl.class.getName()).log(Level.INFO, "Usuario encontrado");
                 }
                 
-                if(autorizado.isEmpty())
-                    return true;
-                else 
+                if(autorizado.isEmpty())        //verificação se existe usuario
                     return false;
+                else 
+                    return true;
         } catch (SQLException ex) {
             
             Logger.getLogger(ClienteDAOImpl.class.getName()).log(Level.SEVERE, "não autorizou", ex);
@@ -96,15 +97,14 @@ public class ClienteDAOImpl implements ClienteDAO {
         try {
                 ArrayList<Cliente> existente = new ArrayList();
                 conn = Database.Conect();
-                Logger.getLogger(ClienteDAOImpl.class.getName()).log(Level.INFO, "CONECTADO AO BANCO");
+                Logger.getLogger(ClienteDAOImpl.class.getName()).log(Level.INFO, "CONECTADO AO BANCO DE DADOS - ClienteDAOImpl");
                 String query = "select email from cad_clientes where email = ?;";
                 
                 stat = conn.prepareStatement(query);
                 stat.setString(1, email);
                 ResultSet result = stat.executeQuery();
                 conn.close();
-                 Logger.getLogger(ClienteDAOImpl.class.getName()).log(Level.INFO, "QUERY EXECUTADA");
-               // System.out.println(result.getArray("username"));
+                 Logger.getLogger(ClienteDAOImpl.class.getName()).log(Level.INFO, "DESCONECTADO DO BANCO DE DADOS - ClienteDAOImpl");
                 while(result.next()){
                     Cliente x = new Cliente();
                     x.setEmail(result.getString("email"));
@@ -119,10 +119,8 @@ public class ClienteDAOImpl implements ClienteDAO {
             
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-            
             return false;
         }
-        
     }
     
 }

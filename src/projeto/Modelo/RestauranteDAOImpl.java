@@ -26,8 +26,9 @@ public class RestauranteDAOImpl implements RestauranteDAO {
     public boolean insert(String nome_fant, String senha, String razao_social, String email, String telefone, String local, String local_nome, String numero, int cidade, String lotacao) {
         try {
             conn = Database.Conect();
-            String query = "insert into cad_estabelecimentos(fantasia,razao,local,nome_local,numero,telefone,ativo,id_cidade,lotacao,tipo_usuario, email)"
-                    + "values (?,?,?,?,?,?,?,?,?,?,?)";
+            Logger.getLogger(RestauranteDAOImpl.class.getName()).log(Level.INFO, "CONECTADO AO BANCO - auth");
+            String query = "insert into cad_estabelecimentos(fantasia,razao,local,nome_local,numero,telefone,ativo,id_cidade,lotacao,tipo_usuario, email,passwrd)"
+                    + "values (?,?,?,?,?,?,?,?,?,?,?,?)";
             stat = conn.prepareStatement(query);
             stat.setString(1, nome_fant);
             stat.setString(2, razao_social);
@@ -40,8 +41,10 @@ public class RestauranteDAOImpl implements RestauranteDAO {
             stat.setInt(9, Integer.parseInt(lotacao));
             stat.setString(10, "r");
             stat.setString(11, email);
+            stat.setString(12, senha);
             stat.execute();
             conn.close();
+            Logger.getLogger(RestauranteDAOImpl.class.getName()).log(Level.INFO, "Conexão com BD encerrada");
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(RestauranteDAOImpl.class.getName()).log(Level.SEVERE, "ERRO AO ADICIONAR NO BD", ex);
@@ -75,6 +78,7 @@ public class RestauranteDAOImpl implements RestauranteDAO {
         try {
                 ArrayList<Restaurante> existente = new ArrayList();
                 conn = Database.Conect();
+                Logger.getLogger(RestauranteDAOImpl.class.getName()).log(Level.INFO, "CONECTADO AO BANCO - auth");
                 Logger.getLogger(RestauranteDAOImpl.class.getName()).log(Level.INFO, "CONECTADO AO BANCO has_user");
                 String query = "select email from cad_estabelecimentos where email = ?;";
                 
@@ -82,7 +86,7 @@ public class RestauranteDAOImpl implements RestauranteDAO {
                 stat.setString(1, email);
                 ResultSet result = stat.executeQuery();
                 conn.close();
-                 Logger.getLogger(RestauranteDAOImpl.class.getName()).log(Level.INFO, "QUERY EXECUTADA has_user");
+                 Logger.getLogger(RestauranteDAOImpl.class.getName()).log(Level.INFO, "Conexão com BD encerrada - has_user");
                // System.out.println(result.getArray("username"));
                 while(result.next()){
                     Restaurante x = new Restaurante();
@@ -107,22 +111,21 @@ public class RestauranteDAOImpl implements RestauranteDAO {
         ArrayList<Restaurante> autorizado = new ArrayList();
         try {
                 conn = Database.Conect();
-                Logger.getLogger(RestauranteDAOImpl.class.getName()).log(Level.INFO, "CONECTADO AO BANCO auth");
-                String query = "select email, senha from cad_clientes where email = ? and senha = ?;";
+                Logger.getLogger(RestauranteDAOImpl.class.getName()).log(Level.INFO, "CONECTADO AO BANCO - auth");
+                String query = "select email, passwrd from cad_estabelecimentos where email = ? and passwrd = ?;";
                 
                 stat = conn.prepareStatement(query);
                 stat.setString(1, email);
                 stat.setString(2, password);
                 ResultSet result = stat.executeQuery();
                 conn.close();
-                 Logger.getLogger(RestauranteDAOImpl.class.getName()).log(Level.INFO, "QUERY EXECUTADA auth");
-               // System.out.println(result.getArray("username"));
+                 Logger.getLogger(RestauranteDAOImpl.class.getName()).log(Level.INFO, "Conexão com BD encerrada - auth");
                 while(result.next()){
                     Restaurante x = new Restaurante();
                     x.setEmail(result.getString("email"));
-                    x.setPassword(result.getString("senha"));
+                    x.setPassword(result.getString("passwrd"));
                     autorizado.add(x);
-                     Logger.getLogger(RestauranteDAOImpl.class.getName()).log(Level.INFO, "Usuario encontrado auth");
+                     Logger.getLogger(RestauranteDAOImpl.class.getName()).log(Level.INFO, "Usuario encontrado - auth");
                 }
                 
                 if(autorizado.isEmpty())

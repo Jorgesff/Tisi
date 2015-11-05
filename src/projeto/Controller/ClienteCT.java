@@ -6,23 +6,24 @@
 package projeto.Controller;
 
 import projeto.Modelo.ClienteDAOImpl;
-import projeto.Objetos.Cliente;
 
 /**
  *
  * @author jorgesff
  */
 public class ClienteCT {
-   
-  public boolean Auth(String user, String pass){
+    //--------------- Metodo Controller para autenticar usuario----- Retorno true: usuario autenticado false: não autenticado
+  public boolean Auth(String user, String pass){  
       ClienteDAOImpl cliDAO = new ClienteDAOImpl();
       return cliDAO.auth_cliente(user, pass);
-  }
-  public boolean novo(String nome,int id_cidade, String telefone, String email, String password){
+      
+  }//-------------- metodo controller para adicionar novo usuario
+  public boolean novo(String nome,int id_cidade, String telefone, String email, String password){ 
         ClienteDAOImpl cliDAO = new ClienteDAOImpl();
         return cliDAO.insert(nome, id_cidade, telefone, email, password);
-  }
-  public boolean has_user(String email){
+        
+  }// -------------- Metodo controller para verificação de usuario ja existente Retorno true: false: primeiro usuario true: usuario repetido
+  public boolean has_user(String email){                    
       ClienteDAOImpl cliDAO = new ClienteDAOImpl();
       return cliDAO.has_user(email);
   }

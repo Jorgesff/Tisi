@@ -5,7 +5,9 @@
  */
 package projeto.Controller;
 
+import java.util.ArrayList;
 import projeto.Modelo.ClienteDAOImpl;
+import projeto.Objetos.Restaurante;
 
 /**
  *
@@ -26,5 +28,9 @@ public class ClienteCT {
   public boolean has_user(String email){                    
       ClienteDAOImpl cliDAO = new ClienteDAOImpl();
       return cliDAO.has_user(email);
+  }
+  public ArrayList<Restaurante> busca(String busca, String tipo){
+      ClienteDAOImpl cliDAO = new ClienteDAOImpl();
+      return cliDAO.Search_intern(busca, tipo);
   }
 }

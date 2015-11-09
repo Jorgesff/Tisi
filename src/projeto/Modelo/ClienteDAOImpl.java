@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import projeto.Objetos.Cliente;
+import projeto.Objetos.Restaurante;
 
 /**
  *
@@ -38,7 +39,7 @@ public class ClienteDAOImpl implements ClienteDAO {
             conn.close();               //Fecha conexão com o BD
             Logger.getLogger(ClienteDAOImpl.class.getName()).log(Level.INFO, "DESCONECTADO DO BANCO DE DADOS - ClienteDAOImpl");
             return true;
-        } catch (SQLException ex) {
+        }catch (SQLException ex) {
             Logger.getLogger(ClienteDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
@@ -82,8 +83,49 @@ public class ClienteDAOImpl implements ClienteDAO {
     }
 
     @Override
-    public ArrayList<Cliente> Search_intern(String username) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<Restaurante> Search_intern(String busca, String tipo) {
+        ArrayList<Restaurante> resultado = new ArrayList();
+        try {
+            conn = Database.Conect();
+            if(tipo.equals("cidade")){
+                String query = "select e.fantasia, e.local, e.nome_local, e.numero, e.telefone, e.lotacao from cad_estabelecimentos e ,cidade c where e.id_cidada = c.id_cidade and ? = ?";
+                stat = conn.prepareStatement(query);
+                stat.setString(1, "c."+tipo);
+                stat.setString(2, busca);
+                ResultSet result = stat.executeQuery();
+                while(result.next()){
+                    Restaurante res = new Restaurante();
+                    res.setFantasia(result.getString("fantasia"));
+                    res.setLocal(result.getString("local"));
+                    res.setEndereco(result.getString("nome_local"));
+                    res.setNumero(result.getString("numero"));
+                    res.setTelefone(result.getString("telefone"));
+                    res.setLotacao(result.getInt("lotacao"));
+                    resultado.add(res);
+                }
+                return resultado;
+            }else{   
+                String query = "select fantasia, local, nome_local, numero, telefone, lotacao from cad_estabelecimentos where ? = ?";
+                stat = conn.prepareStatement(query);
+                stat.setString(1, tipo);
+                stat.setString(2, busca);
+                ResultSet result = stat.executeQuery();
+                while(result.next()){
+                    Restaurante res = new Restaurante();
+                    res.setFantasia(result.getString("fantasia"));
+                    res.setLocal(result.getString("local"));
+                    res.setEndereco(result.getString("nome_local"));
+                    res.setNumero(result.getString("numero"));
+                    res.setTelefone(result.getString("telefone"));
+                    res.setLotacao(result.getInt("lotacao"));
+                    resultado.add(res);
+                }
+            return resultado;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
         
     }
 

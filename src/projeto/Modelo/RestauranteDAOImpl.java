@@ -12,7 +12,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import projeto.Objetos.Cliente;
 import projeto.Objetos.Restaurante;
 
 /**
@@ -43,6 +42,9 @@ public class RestauranteDAOImpl implements RestauranteDAO {
             stat.setString(11, email);
             stat.setString(12, senha);
             stat.execute();
+            String query2 = "insert into tb_lugares_disponiveis(id_restaurante,lugares) values (?,?)";
+            stat = conn.prepareStatement(query2);
+            stat.setInt(cidade, cidade);
             conn.close();
             Logger.getLogger(RestauranteDAOImpl.class.getName()).log(Level.INFO, "Conexão com BD encerrada");
             return true;

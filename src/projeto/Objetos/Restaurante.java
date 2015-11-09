@@ -10,8 +10,17 @@ package projeto.Objetos;
  * @author jorgesff
  */
 public class Restaurante {
-   private String nome, usuario, email,local,endereco,telefone, password ;
+   private String fantasia, email,local,endereco,cidade,telefone, password,numero ;
+   private int lotacao;
+   
+    public String getCidade() {
+        return cidade;
+    }
 
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+  
     public String getPassword() {
         return password;
     }
@@ -19,7 +28,6 @@ public class Restaurante {
     public void setPassword(String password) {
         this.password = password;
     }
-   private int lotacao,numero;
 
     public int getLotacao() {
         return lotacao;
@@ -37,20 +45,12 @@ public class Restaurante {
         this.telefone = telefone;
     }
 
-    public  String getNome() {
-        return nome;
+    public  String getFantasia() {
+        return fantasia;
     }
 
-    public  void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public  String getUsuario() {
-        return usuario;
-    }
-
-    public  void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public  void setFantasia(String fantasia) {
+        this.fantasia = fantasia;
     }
 
     public  String getEmail() {
@@ -77,11 +77,11 @@ public class Restaurante {
         this.endereco = endereco;
     }
 
-    public  int getNumero() {
+    public  String getNumero() {
         return numero;
     }
 
-    public  void setNumero(int numero) {
+    public  void setNumero(String numero) {
         this.numero = numero;
     }
 }

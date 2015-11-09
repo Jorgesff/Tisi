@@ -5,8 +5,6 @@
  */
 package projeto.view;
 
-import java.awt.Color;
-import java.util.Arrays;
 import projeto.Controller.ClienteCT;
 import projeto.Controller.RestauranteCT;
 
@@ -130,7 +128,8 @@ public class Login extends javax.swing.JFrame {
         ClienteCT cliCT = new ClienteCT();
         RestauranteCT resCT = new RestauranteCT();
         if(cliCT.Auth(user, password)== true || resCT.auth_restaurante(user, password)== true){
-            new Home().setVisible(true);
+          //Condicional: verificar qual o tipo de usuario para abrir a home adequada.
+            new Home(user).setVisible(true);
             this.dispose();
         }else
             LB_auth.setText("Autorização negada");

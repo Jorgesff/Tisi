@@ -6,6 +6,7 @@
 package projeto.Modelo;
 
 import java.util.ArrayList;
+import projeto.Objetos.Reserva;
 import projeto.Objetos.Restaurante;
 
 /**
@@ -20,4 +21,5 @@ public interface RestauranteDAO {
     public int delete(String nome);
     public ArrayList<Restaurante> select_cozinha(String nacionalidade);
     public boolean has_user(String email);
+    public ArrayList<Reserva> lista_reservas(Restaurante res);
 }  

@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import projeto.Objetos.Reserva;
 import projeto.Objetos.Restaurante;
 
 /**
@@ -141,6 +142,11 @@ public class RestauranteDAOImpl implements RestauranteDAO {
             return false;
         }
                 
+    }
+
+    @Override
+    public ArrayList<Reserva> lista_reservas(Restaurante res) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
